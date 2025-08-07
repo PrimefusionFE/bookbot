@@ -1,3 +1,4 @@
+import sys
 from stats import get_num_words
 from stats import get_chararacter_counts
 from stats import get_sorted_dictionary
@@ -7,12 +8,13 @@ def get_book_text(filepath):
         return file.read()
 
 def main():
-    text = get_book_text("books/frankenstein.txt")
-    
-    
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
-    
-    
+    filepath = sys.argv[1]
+    text = get_book_text(filepath)
+        
     print("============ BOOKBOT ============")
     print("Analyzing book found at books/frankenstein.txt...")
     print("----------- Word Count ----------")
@@ -27,7 +29,6 @@ def main():
         if (sorted[i]["char"].isalpha()):
             print(f"{sorted[i]["char"]}: {sorted[i]["num"]}")
         
-
     print("============= END ===============")
 
 main()
